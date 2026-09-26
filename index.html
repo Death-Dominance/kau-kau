@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kau kau — Premium Shraad Kawa Booking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0c;
+    --panel: #141418;
+    --panel-2: #1b1b20;
+    --line: #29292f;
+    --gold: #c9a227;
+    --gold-soft: #e8c95c;
+    --text: #f2f1ec;
+    --muted: #9a9aa2;
+    --danger: #b3483a;
+    --radius: 14px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  button{ font-family: inherit; cursor: pointer; border: none; }
+  img{ max-width: 100%; display:block; }
+
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- NAV ---------- */
+  header{
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(10,10,12,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1180px; margin: 0 auto;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:20px; letter-spacing:-0.02em; }
+  .brand .mark{
+    width:34px; height:34px; border-radius:9px;
+    background: linear-gradient(155deg, var(--gold-soft), var(--gold) 60%);
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px;
+  }
+  .navlinks{ display:flex; gap:32px; font-size:14.5px; color: var(--muted); }
+  .navlinks a:hover{ color: var(--text); }
+  .navcart{
+    display:flex; align-items:center; gap:10px;
+    background: var(--panel-2); border:1px solid var(--line);
+    padding: 8px 14px; border-radius: 999px; font-size: 13.5px; color: var(--muted);
+  }
+  .navcart b{ color: var(--gold-soft); font-weight:700; }
+  .navcart-icon{ font-size:15px; }
+  @media (max-width: 760px){ .navlinks{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 84px 32px 60px;
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(ellipse 600px 300px at 85% -10%, rgba(201,162,39,0.13), transparent 60%);
+  }
+  .hero-inner{
+    max-width: 1180px; margin: 0 auto;
+    display:grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items:center;
+  }
+  .eyebrow-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size: 12.5px; color: var(--gold-soft);
+    background: rgba(201,162,39,0.1); border: 1px solid rgba(201,162,39,0.3);
+    padding: 6px 12px; border-radius: 999px; margin-bottom: 22px;
+  }
+  h1.headline{
+    font-size: clamp(34px, 4.4vw, 56px);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+    max-width: 11ch;
+  }
+  .headline .accent{ color: var(--gold-soft); }
+  .hero-sub{
+    margin-top: 22px; font-size: 17px; color: var(--muted); max-width: 46ch;
+  }
+  .hero-hindi{
+    margin-top: 14px; font-size: 18px; color: var(--text); font-weight:500;
+  }
+  .hero-ctas{ margin-top: 32px; display:flex; gap: 14px; flex-wrap: wrap; }
+  .btn{
+    padding: 13px 24px; border-radius: 10px; font-size: 14.5px; font-weight: 600;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background: var(--gold-soft); color: #17140a;
+  }
+  .btn-primary:hover{ background: var(--gold); transform: translateY(-1px); }
+  .btn-ghost{
+    background: transparent; color: var(--text); border: 1px solid var(--line);
+  }
+  .btn-ghost:hover{ border-color: var(--gold); color: var(--gold-soft); }
+
+  .hero-stats{
+    display:flex; gap: 28px; margin-top: 40px; flex-wrap:wrap;
+  }
+  .stat b{ display:block; font-size: 22px; color: var(--gold-soft); font-weight:800; }
+  .stat span{ font-size: 12.5px; color: var(--muted); }
+
+  .hero-visual{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-visual::before{
+    content:""; position:absolute; inset:0;
+    background: radial-gradient(circle at 30% 20%, rgba(201,162,39,0.12), transparent 55%);
+  }
+  .crow-photo{
+    width: 100%; aspect-ratio: 1/1; border-radius: 14px;
+    background: linear-gradient(160deg, #202024, #101012);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 90px; border: 1px solid var(--line);
+    position: relative; z-index:1;
+  }
+  /* SWAP POINT 1: replace the .crow-photo div content above with
+     <img src="your-photo.jpg" alt="Pakshal"> to drop in the real image */
+  .crow-caption{
+    display:flex; justify-content: space-between; align-items:center;
+    margin-top: 16px; position: relative; z-index:1;
+  }
+  .crow-caption h3{ font-size: 16px; font-weight:700; }
+  .crow-caption span{ font-size: 12.5px; color: var(--muted); }
+
+
+  @media (max-width: 860px){
+    .hero-inner{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- SPONSOR STRIP ---------- */
+  .sponsors{
+    border-bottom: 1px solid var(--line);
+    padding: 22px 32px;
+  }
+  .sponsors-inner{
+    max-width:1180px; margin:0 auto; display:flex; align-items:center; gap: 26px;
+    flex-wrap: wrap; color: var(--muted); font-size: 13px;
+  }
+  .sponsor-logos{ display:flex; gap: 14px; flex-wrap:wrap; }
+  .sponsor-logo{
+    border: 1px solid var(--line); padding: 7px 14px; border-radius: 8px;
+    font-weight: 700; font-size: 13px; color: var(--text); background: var(--panel);
+  }
+
+  /* ---------- SECTION HEADS ---------- */
+  section{ padding: 70px 0; }
+  .section-head{ margin-bottom: 40px; max-width: 640px; }
+  .section-head h2{ font-size: clamp(26px,3vw,34px); font-weight:800; letter-spacing:-0.02em; }
+  .section-head p{ color: var(--muted); margin-top: 10px; font-size: 15.5px; }
+
+  /* ---------- FILTERS ---------- */
+  .filters{
+    display:flex; gap: 10px; flex-wrap: wrap; margin-bottom: 34px;
+  }
+  .filter-chip{
+    background: var(--panel); border: 1px solid var(--line); color: var(--muted);
+    padding: 9px 18px; border-radius: 999px; font-size: 13.5px; font-weight:600;
+    transition: all .15s ease;
+  }
+  .filter-chip:hover{ color: var(--text); border-color: #3a3a42; }
+  .filter-chip.active{
+    background: var(--gold-soft); color: #17140a; border-color: var(--gold-soft);
+  }
+
+  /* ---------- PRODUCT GRID ---------- */
+  .grid{
+    display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+  }
+  @media (max-width: 980px){ .grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 680px){ .grid{ grid-template-columns: 1fr; } }
+
+  .card{
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; display:flex; flex-direction: column;
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .card:hover{ border-color: #3a3a42; transform: translateY(-3px); }
+  .card-media{
+    aspect-ratio: 16/11; background: linear-gradient(160deg, #1c1c21, #101012);
+    display:flex; align-items:center; justify-content:center; font-size: 56px;
+    border-bottom: 1px solid var(--line); position: relative;
+  }
+  /* SWAP POINT 2: each .card-media div is a placeholder — replace with
+     <img src="..."> per product when real photos are ready */
+  .card-tag{
+    position:absolute; top:12px; left:12px; background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.15); color: var(--gold-soft);
+    font-size: 11px; font-weight:700; padding: 4px 9px; border-radius:6px;
+  }
+  .card-body{ padding: 20px 20px 22px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .card-body h3{ font-size: 17px; font-weight:700; letter-spacing:-0.01em; }
+  .card-body .desc{ font-size: 13.5px; color: var(--muted); flex:1; }
+  .price-row{ display:flex; align-items:baseline; gap:8px; margin-top:2px; }
+  .price-old{ font-size: 13px; color: var(--muted); text-decoration: line-through; }
+  .price-new{ font-size: 20px; font-weight:800; color: var(--gold-soft); }
+  .price-note{ font-size: 11.5px; color: var(--muted); }
+  .card-actions{ display:flex; gap:10px; margin-top: 12px; }
+  .card-actions .btn{ flex:1; padding: 10px 12px; font-size: 13px; text-align:center; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{ display:grid; grid-template-columns: repeat(4,1fr); gap: 18px; }
+  @media (max-width: 860px){ .steps{ grid-template-columns: repeat(2,1fr); } }
+  .step{ background: var(--panel); border:1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .step .num{ color: var(--gold-soft); font-weight:800; font-size: 13px; margin-bottom: 10px; }
+  .step h4{ font-size: 15.5px; font-weight:700; margin-bottom:6px; }
+  .step p{ font-size: 13.5px; color: var(--muted); }
+
+  /* ---------- ABOUT / MANAGER ---------- */
+  .about{
+    display:grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items:center;
+  }
+  @media (max-width: 860px){ .about{ grid-template-columns: 1fr; } }
+  .manager-card{
+    background: var(--panel); border:1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; display:flex; gap: 18px; align-items:center;
+  }
+  .manager-avatar{
+    width:64px; height:64px; border-radius:50%; background: linear-gradient(160deg,#2a2a30,#141417);
+    display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;
+    border: 1px solid var(--line);
+  }
+  .manager-card h4{ font-size:16px; font-weight:700; }
+  .manager-card span{ font-size:13px; color: var(--muted); }
+  .about-copy p{ color: var(--muted); font-size: 15px; margin-bottom: 14px; }
+  .about-copy p:last-child{ margin-bottom:0; }
+  .about-copy strong{ color: var(--text); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top: 1px solid var(--line); padding: 40px 32px; margin-top: 20px;
+  }
+  .footer-inner{
+    max-width:1180px; margin:0 auto; display:flex; justify-content:space-between;
+    flex-wrap: wrap; gap: 20px; color: var(--muted); font-size: 13px;
+  }
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position: fixed; inset:0; background: rgba(6,6,8,0.72);
+    backdrop-filter: blur(4px);
+    display:none; align-items:center; justify-content:center; z-index: 200; padding: 24px;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal{
+    background: var(--panel); border:1px solid var(--line); border-radius: 18px;
+    max-width: 560px; width:100%; max-height: 86vh; overflow-y:auto;
+    padding: 30px; position:relative;
+    animation: modalIn .18s ease;
+  }
+  @keyframes modalIn{ from{ opacity:0; transform: translateY(8px) scale(0.98);} to{opacity:1; transform:none;} }
+  .modal-close{
+    position:absolute; top:18px; right:18px; width:32px; height:32px; border-radius:8px;
+    background: var(--panel-2); border:1px solid var(--line); color: var(--muted);
+    font-size:16px; display:flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{ color: var(--text); }
+  .modal-media{
+    width:100%; aspect-ratio: 16/9; border-radius:12px; margin-bottom:20px;
+    background: linear-gradient(160deg,#1c1c21,#101012); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:64px;
+  }
+  /* SWAP POINT 3: modal image placeholder */
+  .modal h3{ font-size:22px; font-weight:800; margin-bottom:6px; }
+  .modal .modal-desc{ color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+  .spec-table{ width:100%; border-collapse: collapse; margin-bottom: 22px; }
+  .spec-table tr{ border-bottom: 1px solid var(--line); }
+  .spec-table tr:last-child{ border-bottom:none; }
+  .spec-table td{ padding: 10px 0; font-size: 13.5px; }
+  .spec-table td:first-child{ color: var(--muted); width: 46%; }
+  .spec-table td:last-child{ font-weight: 600; text-align:right; color: var(--text); }
+  .modal-actions{ display:flex; gap: 12px; }
+  .modal-actions .btn{ flex:1; }
+
+  /* ---------- TOAST ---------- */
+  .toast{
+    position: fixed; bottom: 28px; right: 28px; z-index: 300;
+    background: var(--panel); border: 1px solid var(--gold);
+    border-radius: 14px; padding: 18px 20px; max-width: 340px;
+    display:flex; gap: 14px; align-items:flex-start;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform: translateY(140%); opacity:0;
+    transition: transform .35s cubic-bezier(.2,.9,.3,1.3), opacity .3s ease;
+  }
+  .toast.show{ transform: translateY(0); opacity:1; }
+  .toast-icon{ font-size: 26px; flex-shrink:0; }
+  .toast h5{ font-size: 14px; font-weight:700; margin-bottom:4px; }
+  .toast p{ font-size: 12.5px; color: var(--muted); }
+  @media (max-width:520px){ .toast{ left:16px; right:16px; max-width:none; } }
+
+  .crow-photo img, .card-media img, .modal-media img{ width:100%; height:100%; object-fit:cover; border-radius:inherit; }
+  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar-thumb{ background: #2a2a30; border-radius: 8px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand"><span class="mark">🐦‍⬛</span> kau kau</div>
+    <div class="navlinks">
+      <a href="#packages">Packages</a>
+      <a href="#how">How it works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="navcart"><span class="navcart-icon">🛒</span> Kawa requested: <b id="cartCount">0</b></div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow-tag">✦ Now booking for this Shraad season</div>
+      <h1 class="headline">Bring the crow home. <span class="accent">Professionally.</span></h1>
+      <p class="hero-sub">kau kau is India's first enterprise-grade platform for Shraad kawa bookings — vetted crows, guaranteed arrival windows, and a manager who actually picks up the phone.</p>
+      <p class="hero-hindi">Shraad me aaye aur apne ghar kawa le jaaye.</p>
+      <div class="hero-ctas">
+        <a href="#packages" class="btn btn-primary">Book now</a>
+        <a href="#about" class="btn btn-ghost">Meet the manager</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>1</b><span>Crow on payroll</span></div>
+        <div class="stat"><b>100%</b><span>Caw satisfaction</span></div>
+        <div class="stat"><b>Depends on package</b><span>Booking amount*</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="crow-photo"><img src="pakshaal2.jpeg" alt="Pakshaal"></div>
+      <div class="crow-caption">
+        <div>
+          <h3>Pakshal</h3>
+          <span>Lead Crow, Field Operations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sponsors">
+  <div class="sponsors-inner">
+    <span>Proudly sponsored by</span>
+    <div class="sponsor-logos">
+      <div class="sponsor-logo">Aniket</div>
+      <div class="sponsor-logo">Namish</div>
+      <div class="sponsor-logo">Black Dog &amp; Co.</div>
+    </div>
+  </div>
+</div>
+<div class="manager-card">
+      <div class="manager-avatar">👔</div>
+      <div>
+        <h4>Piyush Yadav</h4>
+        <span>Founder &amp; General Manager, kau kau</span>
+        <p style="margin-top:8px;font-size:13px;color:var(--muted);">"We don't sell crows. We deliver closure." — company handbook, page 1</p>
+      </div>
+</div>
+     
+<section id="packages">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Choose your kawa package</h2>
+      <p>Every tier is fulfilled by the same crow. What changes is how seriously we pretend otherwise.</p>
+    </div>
+
+    <div class="filters" id="filterBar">
+      <button class="filter-chip active" data-filter="all">All packages</button>
+      <button class="filter-chip" data-filter="residential">Residential</button>
+      <button class="filter-chip" data-filter="premium">Premium</button>
+      <button class="filter-chip" data-filter="corporate">Corporate</button>
+      <button class="filter-chip" data-filter="nri">NRI</button>
+      <button class="filter-chip" data-filter="bulk">Society / Bulk</button>
+    </div>
+
+    <div class="grid" id="productGrid"></div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How it works</h2>
+      <p>A rigorous four-step process, refined over one (1) prior booking.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h4>Select a package</h4><p>Pick the tier that matches how many ancestors you're expecting.</p></div>
+      <div class="step"><div class="num">02</div><h4>Confirm the roof</h4><p>Our team surveys your terrace for structural crow-worthiness.</p></div>
+      <div class="step"><div class="num">03</div><h4>Pakshal arrives</h4><p>On time, in uniform, mildly judgmental.</p></div>
+      <div class="step"><div class="num">04</div><h4>You feed, he caws</h4><p>Ritual complete. Invoice generated.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="about-copy">
+      <h2 style="font-size:30px;font-weight:800;letter-spacing:-0.02em;margin-bottom:18px;">Run with the seriousness of a Fortune 500. Staffed by one crow.</h2>
+      <p><strong>kau kau</strong> was founded on the belief that ancestral rituals deserve enterprise infrastructure. We are not a hobby. We are not a joke. We have a manager.</p>
+      <p>Our operations are backed by <strong>Aniket, Namish, and Black Dog &amp; Co.</strong>, three sponsors who believe in this mission as much as we pretend to.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <div>© 2026 kau kau Pvt. Ltd. All crows reserved.</div>
+    <div>Manager on duty: Piyush Yadav · Lead Crow: Pakshal </div>
+    <div>Terms apply, mostly ignored.</div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon">🐦‍⬛</div>
+  <div>
+    <h5 id="toastTitle">Inquiry received</h5>
+    <p id="toastMsg">Pakshal has been notified and will caw back shortly.</p>
+  </div>
+</div>
+
+<script>
+  const products = [
+    {
+      id: 1,
+      name: "Standard Ekal Kawa Visit",
+      category: "residential",
+      tag: "Best seller",
+      icon: "🐦‍⬛",
+      img: "pakshaal.jpeg",
+      desc: "One crow, one roof, one ancestor at a time. Our entry-level offering for the traditionalist household.",
+      price: "phokatiya",
+      specs: [
+        ["Crow model", "Pakshal, Standard Trim"],
+        ["Caw decibel rating", "78 dB (neighbour-audible)"],
+        ["Arrival window", "6:00 AM – whenever"],
+        ["Beak class", "Economy"],
+        ["Dietary preference", "Rice, strictly no quinoa"],
+        ["SLA", "Best effort, spiritually binding"]
+      ]
+    },
+    {
+      id: 2,
+      name: "Premium Experience",
+      category: "premium",
+      tag: "Featuring Pakshal",
+      icon: "👑",
+      img: "pakshaal.jpeg",
+      desc: "The full Big Black Crow treatment. Priority perch, dramatic entrance, extended eye contact included.",
+      price: "₹0.09",
+      specs: [
+        ["Crow model", "Pakshal "],
+        ["Caw decibel rating", "96 dB (concert-adjacent)"],
+        ["Wingspan", "Confidential, per NDA"],
+        ["Beak class", "Business"],
+        ["Entrance style", "Slow-motion, camera-ready"],
+        ["SLA", "Arrives when he feels like it, always dramatically"]
+      ]
+    },
+    {
+      id: 3,
+      name: "Corporate Shraad Solutions",
+      category: "corporate",
+      tag: "For offices",
+      icon: "🏢",
+      img: "pakshaal.jpeg",
+      desc: "Enterprise-grade ancestral rituals for the modern workplace. Includes a PowerPoint deck nobody asked for.",
+      price: "₹0.90",
+      specs: [
+        ["Crow model", "Pakshal, Enterprise Tier"],
+        ["Minimum floor height", "Ground floor only, HR policy"],
+        ["Reporting", "Weekly caw analytics dashboard"],
+        ["Compliance", "ISO 9001 for Inauspicious Sounds"],
+        ["Account manager", "Piyush Yadav"],
+        ["SLA", "Escalate to manager if crow underperforms"]
+      ]
+    },
+    {
+      id: 4,
+      name: "NRI Kawa Express",
+      category: "nri",
+      tag: "Overseas",
+      icon: "✈️",
+      img: "pakshaal.jpeg",
+      desc: "For families abroad who still want a crow to show up on their behalf. Time zones respected, results not guaranteed.",
+      price: "₹1.00",
+      specs: [
+        ["Crow model", "Pakshal, Long-Haul Configuration"],
+        ["Coverage", "Anywhere with a rooftop and faith"],
+        ["Time zone handling", "IST, apologies in advance"],
+        ["Video proof", "One (1) blurry photo of a crow"],
+        ["Refund policy", "N/A"],
+        ["SLA", "Best effort across continents"]
+      ]
+    },
+    {
+      id: 5,
+      name: "Society Bulk Package",
+      category: "bulk",
+      tag: "Housing societies",
+      icon: "🏘️",
+      img: "pakshaal.jpeg",
+      desc: "One crow, several balconies, a very confusing afternoon. Ideal for RWAs coordinating multiple Shraads.",
+      price: "₹0.50",
+      specs: [
+        ["Crow model", "Pakshal, on loan between floors"],
+        ["Max balconies covered", "Up to 6, sequentially"],
+        ["Coordination", "WhatsApp group required"],
+        ["Conflict resolution", "Whoever calls loudest gets him first"],
+        ["Discount", "None"],
+        ["SLA", "One crow can only be in one place at a time"]
+      ]
+    },
+    {
+      id: 6,
+      name: "Emergency Same-Day Kawa",
+      category: "residential",
+      tag: "Urgent",
+      icon: "🚨",
+      img: "pakshaal.jpeg",
+      desc: "Forgot to book? Panic no more. Emergency dispatch for last-minute rituals, subject to crow availability.",
+      price: "₹9",
+      specs: [
+        ["Crow model", "Pakshal, whoever's free"],
+        ["Response time", "Same day, allegedly"],
+        ["Surge pricing", "Cheaper than ever"],
+        ["Availability", "Depends on his mood"],
+        ["Backup crow", "There is no backup crow"],
+        ["SLA", "We will try, no promises"]
+      ]
+    }
+  ];
+
+  const grid = document.getElementById('productGrid');
+  const filterBar = document.getElementById('filterBar');
+  let cartCount = 0;
+
+  function renderGrid(filter){
+    grid.innerHTML = '';
+    const list = filter === 'all' ? products : products.filter(p => p.category === filter);
+    list.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-media">
+          <span class="card-tag">${p.tag}</span>
+          ${p.img ? `<img src="${p.img}" alt="${p.name}">` : p.icon}
+        </div>
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p class="desc">${p.desc}</p>
+          <div class="price-row">
+            <span class="price-old">₹4,999</span>
+            <span class="price-new">${p.price}</span>
+          </div>
+          <span class="price-note">Booking amount, taxes not applicable</span>
+          <div class="card-actions">
+            <button class="btn btn-ghost" onclick="openModal(${p.id})">View details</button>
+            <button class="btn btn-primary" onclick="inquire('${p.name.replace(/'/g,"\\'")}')">Inquire now</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  filterBar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-chip');
+    if(!btn) return;
+    filterBar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid(btn.dataset.filter);
+  });
+
+  renderGrid('all');
+
+  // MODAL
+  const overlay = document.getElementById('modalOverlay');
+  const modalContent = document.getElementById('modalContent');
+
+  function openModal(id){
+    const p = products.find(x => x.id === id);
+    if(!p) return;
+    modalContent.innerHTML = `
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-media">${p.img ? `<img src="${p.img}" alt="${p.name}">` : p.icon}</div>
+      <h3>${p.name}</h3>
+      <p class="modal-desc">${p.desc}</p>
+      <table class="spec-table">
+        ${p.specs.map(s => `<tr><td>${s[0]}</td><td>${s[1]}</td></tr>`).join('')}
+      </table>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal()">Close</button>
+        <button class="btn btn-primary" onclick="inquire('${p.name.replace(/'/g,"\\'")}'); closeModal();">Inquire now</button>
+      </div>
+    `;
+    overlay.classList.add('open');
+  }
+
+  function closeModal(){
+    overlay.classList.remove('open');
+  }
+
+  overlay.addEventListener('click', (e) => { if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+  // TOAST
+  const toast = document.getElementById('toast');
+  const toastTitle = document.getElementById('toastTitle');
+  const toastMsg = document.getElementById('toastMsg');
+  const toastIcon = document.getElementById('toastIcon');
+  const cartCountEl = document.getElementById('cartCount');
+  let toastTimer;
+
+  const toastMessages = [
+    ["Inquiry received", "Pakshal has personally reviewed your request and will caw back within 3–5 business days."],
+    ["Booking confirmed*", "*Not really confirmed. Piyush Yadav will call you when the crow is available."],
+    ["Request escalated", "Your inquiry has been forwarded to Black Dog & Co. for reasons unclear even to us."],
+    ["Crow notified", "Pakshal has seen your message and chosen to remain silent, as is tradition."],
+    ["Added to the list", "You are now #1 on a waitlist of exactly one crow."]
+  ];
+
+  function inquire(name){
+    cartCount++;
+    cartCountEl.textContent = cartCount;
+    const [title, msg] = toastMessages[Math.floor(Math.random() * toastMessages.length)];
+    toastTitle.textContent = title;
+    toastMsg.textContent = `${name}: ${msg}`;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 4500);
+  }
+</script>
+
+</body>
+</html>
